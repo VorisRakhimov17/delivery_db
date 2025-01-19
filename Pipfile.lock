@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8847eda5345054f082efad3deed14ab9b8d44585920b2d677773e729c59ae479"
+            "sha256": "77956c81da96e5389af6881ee69c24c7492f2ee73a980ee83035aec2b6cb0523"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -57,6 +57,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==0.115.6"
+        },
+        "fastapi-jwt-auth": {
+            "hashes": [
+                "sha256:43110a227e36f93b99257a1c79e66df8ed3d4c893291db8f9db2686192011f17",
+                "sha256:d98068a9e828fe5909a1f338efabc3bb53149f11a9d2d395ab9d90fbb486b375"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.6'",
+            "version": "==0.5.0"
         },
         "greenlet": {
             "hashes": [
@@ -408,6 +417,13 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==2.27.2"
+        },
+        "pyjwt": {
+            "hashes": [
+                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
+                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
+            ],
+            "version": "==1.7.1"
         },
         "sniffio": {
             "hashes": [
