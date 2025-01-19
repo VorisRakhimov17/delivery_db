@@ -11,6 +11,7 @@ sqlalchemy-utils = "*"
 psycopg2-binary = "*"
 werkzeug = "*"
 fastapi-jwt-auth = "*"
+pydantic = "==1.10.11"
 
 [dev-packages]
 
