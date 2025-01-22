@@ -1,8 +1,5 @@
-
 from pydantic import BaseModel
 from typing import Optional
-
-
 
 class SignUpModel(BaseModel):
     id: Optional[int]  = None
@@ -24,10 +21,10 @@ class SignUpModel(BaseModel):
             }
         }
 
-
 class Setting(BaseModel):
     authjwt_secret_key: str = "baa95a831f1988bcd6667f3edb472010697b6a99dd4103cfc469984a0f21c1db"
 
 class LoginModel(BaseModel):
     username: str
     password: str
+
