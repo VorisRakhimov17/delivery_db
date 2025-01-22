@@ -2,7 +2,7 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.encoders import jsonable_encoder
 from fastapi_jwt_auth import AuthJWT
-
+from sqlalchemy import or_
 from models import User
 from schemas import SignUpModel, LoginModel
 from database import session, engine
@@ -17,12 +17,19 @@ auth_router = APIRouter(
 session = session(bind=engine)
 
 @auth_router.get("/")
-async def signup():
+async def signup(Authorize: AuthJWT = Depends()):
+    try:
+        Authorize.jwt_required()
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
     return {"message": "Bu auth route signup sahifasi"}
 
 @auth_router.post('/signup', status_code=status.HTTP_201_CREATED)
 async def signup(user: SignUpModel):
+
     db_email = session.query(User).filter(User.email == user.email).first()
+
     if db_email is not None:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Gmail is already registered")
@@ -57,9 +64,19 @@ async def signup(user: SignUpModel):
 
     return response_model
 
-@auth_router.post('/login', status_code=status.HTTP_200_OK)
+@auth_router.post('/login', status_code=200)
 async def login(user: LoginModel, Authorize: AuthJWT=Depends()):
-    db_user = session.query(User).filter(User.username == user.username).first()
+    #db_user = session.query(User).filter(User.username == user.username).first()
+
+    # query with email or username
+
+    db_user = session.query(User).filter(
+        or_(
+            User.username == user.username_or_email,
+            User.email == user.username_or_email
+        )
+
+    ).first()
 
     if db_user and check_password_hash(db_user.password, user.password):
         access_token = Authorize.create_access_token(subject=db_user.username)
